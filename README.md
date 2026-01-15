@@ -7,8 +7,7 @@ The goal of this portfolio is not to showcase advanced models or production-read
 systems, but to demonstrate **how data and machine learning can responsibly support
 product decisions** in real-world contexts.
 
-My background spans engineering, software development, and over a decade building
-subscription and streaming products. This work reflects a product-first approach
+My background spans engineering, software development, and over a decade building and operating subscription and streaming products at scale. This work reflects a product-first approach
 to AI: focusing on metrics, trade-offs, assumptions, and decision impact.
 
 ---
