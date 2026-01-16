@@ -84,5 +84,32 @@ By the end of signal definition, we expect to have:
 These outputs will directly inform the modeling and insight generation phase.
 
 ---
+---
+
+## Phase 3 summary
+
+In this phase, we deliberately separated **signal ideation** from **signal validation**.
+
+Rather than starting from available data or modeling techniques,
+we applied product judgment to decide **which behaviors are worth analyzing at all**.
+
+Key outcomes of this phase:
+
+- A clearly documented **catalog of candidate behavioral signals**
+- Explicit criteria to evaluate signals beyond raw predictive power
+- Guardrails to avoid leakage, noise, and non-actionable correlations
+- A shared language between product and data teams
+
+Only signals that pass this evaluation framework will be considered in subsequent analysis.
+
+This ensures that downstream modeling efforts remain:
+- Interpretable
+- Decision-oriented
+- Aligned with real product levers
+
+With Phase 3 complete, the analysis is ready to move from
+**“what might matter”** to **“what actually drives decisions.”**
+
+---
 
 _Work in progress._
