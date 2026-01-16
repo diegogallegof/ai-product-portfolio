@@ -83,11 +83,11 @@ This case study is organized into clear analytical phases:
    This document (`README.md`)
 
 2. **Analytical framing**  
-   → See [`02_analytical_framing/`](../02_analytical_framing/)  
-   Defines hypotheses, constraints, assumptions, and decision questions **before analysis**.
+   → See [`02_analytical_framing/`](./02_analytical_framing/)  
+   Defines hypotheses, constraints, assumptions, and decision questions before analysis.
 
 3. **Signal definition & evaluation**  
-   → See [`03_signal_definition/`](../03_signal_definition/)  
+   → See [`03_signal_definition/`](./03_signal_definition/)  
    Identification, validation, and prioritization of behavioral signals.
 
 4. **Modeling & insights**  
