@@ -1,10 +1,11 @@
 # Signal Evaluation Plan
 
 This document defines how behavioral signals will be evaluated, validated, and selected
-to support product decisions related to subscription conversion.
+to support subscription conversion decisions.
 
-The goal is not to maximize model performance, but to identify **reliable, interpretable,
-and actionable signals** that can guide experimentation and product strategy.
+The objective is **not** to maximize model performance,
+but to identify **reliable, interpretable, and actionable signals**
+that can guide product strategy and experimentation.
 
 ---
 
@@ -12,145 +13,180 @@ and actionable signals** that can guide experimentation and product strategy.
 
 Not all behavioral signals are equally useful.
 
-A good signal must satisfy **three dimensions simultaneously**:
+A strong signal must satisfy **three dimensions simultaneously**:
 
-1. Predictive value — does it correlate with conversion?
-2. Stability — does it behave consistently over time and cohorts?
-3. Actionability — can product teams realistically act on it?
+1. **Predictive value** — does it meaningfully relate to conversion?
+2. **Stability** — does it behave consistently over time and cohorts?
+3. **Actionability** — can product teams realistically act on it?
 
-This plan establishes a structured framework to avoid:
-- Overfitting to noisy behaviors
-- Optimizing for vanity correlations
+This plan exists to avoid:
+- Optimizing for noise or vanity correlations
+- Overfitting to historical cohorts
 - Building models that do not translate into decisions
 
 ---
 
 ## 2. Evaluation principles
 
-All signals will be evaluated under the following principles:
+All signals are evaluated under the following principles:
 
-- **Product relevance over model complexity**
-- **Causality awareness (correlation ≠ causation)**
-- **Temporal integrity (no future leakage)**
-- **Interpretability for stakeholders**
-- **Decision impact over statistical perfection**
+- Product relevance over statistical sophistication
+- Temporal integrity (no future leakage)
+- Interpretability for non-technical stakeholders
+- Decision impact over marginal accuracy gains
 
 ---
 
-## 3. Evaluation dimensions
+## 3. Quantitative evaluation dimensions
 
-Each signal will be assessed across five core dimensions.
+Each signal is evaluated across five dimensions.
+Thresholds are indicative and may be adjusted based on data availability.
+
+---
 
 ### 3.1 Predictive strength
 
-Does the signal help discriminate between converters and non-converters?
+**Question:** Does the signal help discriminate between converters and non-converters?
 
-Indicative metrics:
-- Lift vs baseline conversion
-- AUC delta when included in a simple model
-- Mutual information with conversion outcome
-- Univariate effect size
+**Primary checks:**
+- Conversion rate lift vs baseline
+- AUC delta when added to a simple baseline model
+- Effect size consistency across bins or percentiles
 
-Signals with negligible or unstable predictive lift will be deprioritized.
+**Indicative thresholds:**
+- Meaningful conversion lift: **≥ +5–10% relative**
+- AUC delta (single-signal model): **≥ +0.02**
+- Effect direction stable across cohorts
+
+**Fail conditions:**
+- No lift or highly volatile effect
+- Signal only performs in one narrow slice
 
 ---
 
 ### 3.2 Temporal validity & leakage risk
 
-Signals must respect the decision timeline.
+**Question:** Does the signal respect the decision timeline?
 
-Checks include:
-- Signal occurs strictly before conversion event
-- Stability across time windows (D1, D3, D7, D14)
-- No dependency on post-conversion behaviors
-- No implicit exposure to paywall or pricing artifacts
+**Checks:**
+- Signal occurs strictly **before** conversion
+- No dependency on post-paywall or post-payment events
+- Stable behavior across time windows (D1, D3, D7, D14)
 
-Signals failing these checks are rejected regardless of predictive power.
+**Fail conditions:**
+- Signal appears only after monetization exposure
+- Signal implicitly encodes future knowledge
+
+Any signal failing this check is **automatically dropped**.
 
 ---
 
 ### 3.3 Stability across cohorts
 
-A useful signal should generalize.
+**Question:** Does the signal generalize?
 
-Evaluation includes:
-- Performance consistency across acquisition cohorts
-- Sensitivity to country, platform, or traffic source
-- Drift analysis over time
+**Checks:**
+- Consistent effect across acquisition cohorts
+- Similar behavior across platform or geography (when applicable)
+- Limited drift over time
 
-Signals that only work for a narrow segment may be:
-- Flagged as **segment-specific**
-- Excluded from global decisioning
+**Indicative thresholds:**
+- Effect direction consistent in ≥ 70% of cohorts
+- No single cohort drives the majority of signal strength
+
+**Fail conditions:**
+- Strong effect in one cohort, absent or inverted elsewhere
 
 ---
 
-### 3.4 Interpretability & explainability
+### 3.4 Interpretability
 
-Signals must be explainable to:
-- Product managers
-- Designers
-- Growth and experimentation teams
+**Question:** Can the signal be explained clearly?
 
-Questions:
-- Can the signal be described in plain language?
-- Is its effect directionally intuitive?
-- Can it be communicated without statistical caveats?
+**Checks:**
+- Clear behavioral description in plain language
+- Intuitive directional effect
+- Explainable without statistical caveats
 
-Black-box or opaque signals are penalized.
+**Fail conditions:**
+- Signal cannot be explained without model internals
+- Effect contradicts product intuition with no clear rationale
+
+Interpretability is required for signals used in product decisioning,
+even if they show predictive strength.
 
 ---
 
 ### 3.5 Actionability
 
-A signal is only valuable if it can inform action.
+**Question:** Can product teams realistically act on this signal?
 
-We evaluate:
-- Can product influence this behavior?
-- Does it map to a surface (onboarding, messaging, pricing, UX)?
-- Can it be targeted in experiments?
+**Checks:**
+- Signal maps to a controllable product surface
+- Can inform experiments, UX changes, or messaging
+- Can be segmented or targeted meaningfully
 
-Signals with high predictive power but no clear action path are deprioritized.
+**Fail conditions:**
+- No clear product lever
+- Signal describes an outcome rather than a behavior
 
 ---
 
 ## 4. Signal scoring framework
 
-Each signal will be scored on a qualitative scale:
+Each signal is scored qualitatively:
 
-| Dimension            | Score |
-|---------------------|-------|
-| Predictive strength | Low / Medium / High |
-| Temporal validity   | Pass / Risk / Fail |
-| Stability           | Low / Medium / High |
-| Interpretability    | Low / Medium / High |
-| Actionability       | Low / Medium / High |
-
-Final classification:
-- **Keep** — strong candidate for modeling & decisioning
-- **Conditional** — usable in specific contexts or segments
-- **Drop** — not suitable for product decisions
+| Dimension            | Score options        |
+|---------------------|----------------------|
+| Predictive strength | Low / Medium / High  |
+| Temporal validity   | Pass / Risk / Fail   |
+| Stability           | Low / Medium / High  |
+| Interpretability    | Low / Medium / High  |
+| Actionability       | Low / Medium / High  |
 
 ---
 
-## 5. Validation methodology
+## 5. Decision rules
 
-Signals will be validated using:
+Final classification rules:
 
-- Train / validation splits based on time (not random)
+- **Keep**
+  - Predictive strength: Medium or High
+  - Temporal validity: Pass
+  - Stability: Medium or High
+  - Actionability: Medium or High
+
+- **Conditional**
+  - Predictive strength: Medium
+  - Stability issues or segment-specific behavior
+  - Useful for targeted experiments only
+
+- **Drop**
+  - Temporal validity: Fail
+  - Predictive strength: Low
+  - No clear action path
+
+---
+
+## 6. Validation methodology
+
+Signals are validated using:
+
+- Time-based train / validation splits
 - Simple baseline models before complex ones
-- Sensitivity analysis to confirm robustness
+- Sensitivity checks across cohorts
 - Comparison against naive heuristics
 
-This ensures that signals add value beyond obvious baselines.
+Signals must prove value beyond obvious baselines.
 
 ---
 
-## 6. Output of this phase
+## 7. Output of this phase
 
 The outcome of signal evaluation is:
 
 - A short list of **trusted signals**
-- Clear rationale for inclusion or exclusion
+- Explicit rationale for inclusion or exclusion
 - Inputs ready for modeling and insight generation
 - Confidence that signals support real product decisions
 
@@ -158,5 +194,4 @@ This concludes Phase 3 and enables Phase 4: Modeling & Insights.
 
 ---
 
-*Work in progress.*
-
+_Work in progress._
