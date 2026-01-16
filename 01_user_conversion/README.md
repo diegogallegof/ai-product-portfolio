@@ -74,5 +74,25 @@ but the **most actionable** one.
 This is a **product-first data science case study**.
 
 ---
+## Case structure
 
+This case study is structured in clear analytical phases:
+
+1. **Problem definition & product context**  
+   High-level framing of the conversion problem.
+
+2. **Analytical framing**  
+   → See [`02_analytical_framing.md`](./02_analytical_framing.md)  
+   Defines hypotheses, constraints, and decision questions before analysis.
+
+3. **Signal definition & evaluation**  
+   Identification and validation of behavioral signals.
+
+4. **Modeling & insights**  
+   Translating signals into actionable product insights.
+
+5. **Recommendations**  
+   Product decisions and experimentation guidance.
+
+---
 _Work in progress._
