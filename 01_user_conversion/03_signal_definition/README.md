@@ -1,166 +1,88 @@
-# Signal Definition & Evaluation (Phase 3)
+# Signal Definition & Evaluation
 
-This phase defines **what we will treat as a meaningful signal** for subscription conversion, and how we will validate that signals are:
-- measurable
-- stable
-- not leaking the label
-- actionable for product decisions
+This phase focuses on identifying, evaluating, and prioritizing **behavioral signals**
+that may explain and predict subscription conversion.
 
-The goal is not to “create features” blindly — it is to separate **signal vs noise** before modeling.
+The objective is **not** to engineer features or train models yet,
+but to apply product judgment to decide **which signals are worth analyzing**.
 
----
-
-## 1) What we mean by “signal”
-A **signal** is a user behavior or attribute that:
-1) occurs **before** conversion (temporal correctness)
-2) has a plausible **product mechanism** (why it would influence conversion)
-3) can be **instrumented and trusted**
-4) can potentially be influenced by product changes (actionable)
-
-A **non-signal** is:
-- a metric that happens **after** conversion (label leakage)
-- a proxy that is mostly driven by marketing attribution quirks
-- a variable that changes meaning across platforms/markets
-- something we cannot realistically influence
+A signal, in this context, is any observable user behavior that may:
+- Indicate conversion intent
+- Reflect product value realization
+- Be influenced by product decisions or experiments
 
 ---
 
-## 2) Guardrails (what we will NOT allow)
-### 2.1 Label leakage (hard rule)
-We will not include anything that directly encodes “paid subscription” or the purchase funnel completion, for example:
-- payment_success, subscription_active, plan_changed_to_paid
-- receipt validation events
-- post-purchase entitlements
-- “premium_content_played” if it requires already being premium
+## Purpose of this phase
 
-### 2.2 Post-treatment bias
-If a metric is affected by an experiment or intervention we are evaluating, we must treat it carefully.
-Example: if we change onboarding, onboarding completion may become “treatment-dependent”.
+Before modeling or experimentation, it is critical to answer:
 
-### 2.3 Non-comparable definitions
-Signals must be consistent across:
-- platform (iOS/Android/Web)
-- geography (MX/US/etc)
-- app versions
-If not, we either normalize or exclude.
+- Which user behaviors plausibly matter for conversion?
+- Which signals are interpretable and stable enough to trust?
+- Which signals can realistically inform product decisions?
+
+This phase reduces noise, avoids overfitting,
+and ensures downstream analysis remains **actionable**.
 
 ---
 
-## 3) Time windows (so signals are comparable)
-We will define signals within a **fixed observation window** relative to a common anchor event.
+## How signals are evaluated
 
-**Anchor event (example):** `account_created` or `first_app_open`
+Signals are assessed using a structured evaluation framework that considers:
 
-**Candidate observation windows:**
-- **D0 (first session)**: first 0–60 minutes
-- **D1**: first 24 hours
-- **D7**: first 7 days
+1. **Predictive value**  
+   Does the signal meaningfully correlate with conversion?
 
-We will start with **D7** as the main window (more behavior captured), and use D0/D1 for sensitivity checks.
+2. **Stability**  
+   Does it behave consistently across time, cohorts, and segments?
 
----
+3. **Actionability**  
+   Can product teams realistically act on this signal?
 
-## 4) Candidate signal taxonomy
-Below is a product-first taxonomy. Final selection will be driven by data availability and reliability.
+Signals that fail one or more of these criteria are deprioritized,
+even if they appear statistically interesting.
 
-### A) Activation signals (early value realization)
-These indicate the user experienced “aha” moments.
-- first_content_play
-- first_download_completed (if relevant to the product)
-- number_of_distinct_days_active (within window)
-- session_count / total_listening_minutes
+For details, see:
 
-**Why it could matter:** users who reach value faster are more likely to pay.
+→ **Signal evaluation framework:**  
+[`signal_evaluation_plan.md`](./signal_evaluation_plan.md)
 
 ---
 
-### B) Engagement depth signals (habit strength)
-- total_active_days
-- content diversity (unique artists/genres)
-- repeat behavior (plays per day)
-- streak proxy (active consecutive days)
+## Signal inventory
 
-**Why it could matter:** deeper habit → higher perceived value → higher willingness to pay.
+All candidate behavioral signals are documented and categorized in a centralized catalog,
+including rationale, funnel stage, and potential product impact.
 
----
+→ **Signals catalog:**  
+[`signals_catalog.md`](./signals_catalog.md)
 
-### C) Intent signals (purchase curiosity)
-- paywall_view_count
-- pricing_page_visit
-- plan_picker_view
-- subscription_cta_click (without completion)
-
-**Why it could matter:** explicit curiosity about premium.
+This catalog represents hypotheses, not conclusions.
+Signals listed here are subject to validation and may be discarded later.
 
 ---
 
-### D) Friction / pain signals (drivers of upgrade)
-These show the user hit limits or annoyance.
-- ad_impressions / ad_exposure_minutes (if applicable)
-- interrupted_sessions (e.g., buffering, errors)
-- download_wait_time_events (if applicable)
-- “feature_blocked” events (if premium gates exist)
+## What this phase deliberately avoids
 
-**Why it could matter:** users upgrade when friction is high *and* value is proven.
+- ❌ Feature engineering
+- ❌ Model training
+- ❌ Optimization for accuracy
+- ❌ Correlation without product context
 
----
-
-### E) Trust & quality signals (risk reducers)
-- email_verified
-- successful_payment_method_add (without purchase)
-- crash_free_sessions proxy (or app stability proxy)
-- support_contact / help_center_visit
-
-**Why it could matter:** higher trust reduces drop-off at the moment of payment.
+The output of this phase is **clarity**, not metrics.
 
 ---
 
-## 5) Signal quality checklist (must pass)
-Each candidate signal should pass this checklist:
+## Outcome of this phase
 
-1) **Definition**
-- exact event(s)
-- computation method (count/sum/binary)
-- unit (per user per window)
+By the end of signal definition, we expect to have:
 
-2) **Coverage**
-- % of users with non-null values
-- platform coverage
+- A short list of high-confidence behavioral signals
+- Clear reasoning for why each signal matters
+- Explicit trade-offs and assumptions documented
 
-3) **Stability**
-- distribution is not wildly different week to week
-- not driven by tracking bugs
-
-4) **Directionality**
-- expected relationship with conversion (hypothesis)
-
-5) **Actionability**
-- what product lever could move it?
+These outputs will directly inform the modeling and insight generation phase.
 
 ---
 
-## 6) Minimal feature set (first modeling pass)
-We will start with a small, interpretable set (10–20 signals max) that covers:
-- activation
-- engagement
-- intent
-- friction
-
-This keeps the first model readable and prevents “feature soup”.
-
----
-
-## 7) Output of this phase
-At the end of Phase 3, we will publish:
-- `signals_catalog.md` (final definitions + formulas)
-- a short table of selected signals (name, type, expected direction, notes)
-- explicit exclusions (leakage / unreliable / non-actionable)
-
----
-
-## Next: Phase 4 — Modeling & insights
-Once signals are defined and validated, we can model:
-- conversion likelihood (interpretable baseline)
-- segmentation by signal patterns
-- which signals are strongest and most actionable
-- product recommendations tied to signal movement
+_Work in progress._
