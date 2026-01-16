@@ -84,7 +84,6 @@ By the end of signal definition, we expect to have:
 These outputs will directly inform the modeling and insight generation phase.
 
 ---
----
 
 ## Phase 3 summary
 
