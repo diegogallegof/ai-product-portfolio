@@ -44,12 +44,12 @@ This case study aims to answer:
 
 ## 4. Analytical approach (high level)
 
-The analysis will focus on:
+The analysis follows a **product-first data science approach**:
 
-- Behavioral funnel analysis
-- Feature exploration grounded in product logic
+- Behavioral funnel analysis grounded in real user flows
+- Signal exploration driven by product intuition
 - Simple, interpretable models as decision-support tools
-- Validation using holdout cohorts and temporal splits
+- Validation using temporal splits and cohort analysis
 
 The goal is **not** to build the most accurate model,
 but the **most actionable** one.
@@ -58,7 +58,7 @@ but the **most actionable** one.
 
 ## 5. Expected outputs
 
-- Clear articulation of predictive signals
+- Clear articulation of predictive behavioral signals
 - Trade-offs between early vs late prediction
 - Product recommendations informed by data
 - Explicit assumptions and limitations
@@ -74,25 +74,28 @@ but the **most actionable** one.
 This is a **product-first data science case study**.
 
 ---
+
 ## Case structure
 
-This case study is structured in clear analytical phases:
+This case study is organized into clear analytical phases:
 
 1. **Problem definition & product context**  
-   High-level framing of the conversion problem.
+   This document (`README.md`)
 
 2. **Analytical framing**  
-   → See [`02_analytical_framing.md`](./02_analytical_framing.md)  
-   Defines hypotheses, constraints, and decision questions before analysis.
+   → See [`02_analytical_framing/`](../02_analytical_framing/)  
+   Defines hypotheses, constraints, assumptions, and decision questions **before analysis**.
 
 3. **Signal definition & evaluation**  
-   Identification and validation of behavioral signals.
+   → See [`03_signal_definition/`](../03_signal_definition/)  
+   Identification, validation, and prioritization of behavioral signals.
 
 4. **Modeling & insights**  
-   Translating signals into actionable product insights.
+   Translating validated signals into interpretable insights.
 
 5. **Recommendations**  
    Product decisions and experimentation guidance.
 
 ---
+
 _Work in progress._
