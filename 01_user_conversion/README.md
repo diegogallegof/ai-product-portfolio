@@ -1,4 +1,16 @@
-# User Conversion Case Study
+# User Conversion Case Study  
+**AI Product & Product-First Data Science**
+
+This repository presents a **product-first data science case study**
+focused on understanding and improving **subscription conversion**
+in a consumer streaming product.
+
+The work reflects how an **AI Product Manager / Data-informed PM**
+approaches an ambiguous business problem:
+by framing the right questions, identifying meaningful behavioral signals,
+making explicit trade-offs, and translating insights into decisions.
+
+---
 
 ## 1. Problem statement
 
@@ -6,8 +18,11 @@ A subscription-based streaming product is experiencing healthy top-of-funnel gro
 but overall paid conversion remains flat.
 
 Despite multiple experiments across pricing, messaging, and onboarding,
-it is unclear **which user behaviors actually predict conversion**
-and where product intervention would have the highest impact.
+it is unclear:
+
+- **Which user behaviors actually predict conversion**
+- **When conversion intent meaningfully emerges**
+- **Where product intervention has the highest leverage**
 
 The product team needs data-informed guidance to decide:
 - Where to invest experimentation effort
@@ -18,15 +33,18 @@ The product team needs data-informed guidance to decide:
 
 ## 2. Product context
 
-- Product type: Consumer streaming subscription
-- Business model: Freemium → Paid subscription
-- Primary KPI: Subscription conversion rate
-- Secondary KPIs: Activation, retention, LTV proxy signals
+- **Product type:** Consumer streaming subscription
+- **Business model:** Freemium → Paid subscription
+- **Primary KPI:** Subscription conversion rate
+- **Secondary KPIs:** Activation, retention, LTV proxy signals
 
-Constraints:
+### Constraints
 - Limited experimentation capacity
 - High risk of overfitting on historical cohorts
 - Strong seasonality and behavioral variance
+
+These constraints shape both the analytical approach
+and the type of recommendations that are feasible in practice.
 
 ---
 
@@ -47,55 +65,74 @@ This case study aims to answer:
 The analysis follows a **product-first data science approach**:
 
 - Behavioral funnel analysis grounded in real user flows
-- Signal exploration driven by product intuition
-- Simple, interpretable models as decision-support tools
-- Validation using temporal splits and cohort analysis
+- Signal exploration driven by product intuition, not data availability alone
+- Simple, interpretable models used as decision-support tools
+- Validation through cohort analysis and temporal splits
 
 The goal is **not** to build the most accurate model,
-but the **most actionable** one.
+but the **most actionable and explainable** one.
 
 ---
 
-## 5. Expected outputs
+## 5. What this case study demonstrates
 
-- Clear articulation of predictive behavioral signals
-- Trade-offs between early vs late prediction
-- Product recommendations informed by data
-- Explicit assumptions and limitations
+This project showcases how an AI Product or Data-informed PM:
+
+- Frames problems before modeling
+- Distinguishes signal from noise
+- Balances interpretability and accuracy
+- Makes uncertainty and limitations explicit
+- Translates insights into concrete product decisions
 
 ---
 
-## 6. What this is not
+## 6. What this is — and what it is not
 
+**This is:**
+- A product-driven data science case study
+- A realistic decision-making framework under uncertainty
+- A demonstration of applied AI thinking in a product context
+
+**This is not:**
 - ❌ A Kaggle-style modeling exercise
 - ❌ A production ML system
 - ❌ A tutorial on algorithms
 
-This is a **product-first data science case study**.
-
 ---
 
-## Case structure
+## 7. Case structure
 
-This case study is organized into clear analytical phases:
+This case study is organized into clear analytical and decision-making phases:
 
 1. **Problem definition & product context**  
    This document (`README.md`)
 
 2. **Analytical framing**  
-   → See [`02_analytical_framing/`](./02_analytical_framing/)  
-   Defines hypotheses, constraints, assumptions, and decision questions before analysis.
+   → [`02_analytical_framing/`](./02_analytical_framing/)  
+   Hypotheses, assumptions, constraints, and decision questions.
 
 3. **Signal definition & evaluation**  
-   → See [`03_signal_definition/`](./03_signal_definition/)  
+   → [`03_signal_definition/`](./03_signal_definition/)  
    Identification, validation, and prioritization of behavioral signals.
 
 4. **Modeling & insights**  
-   Translating validated signals into interpretable insights.
+   → [`04_modeling_insights/`](./04_modeling_insights/)  
+   Interpretable modeling and extraction of product-relevant insights.
 
-5. **Recommendations**  
-   Product decisions and experimentation guidance.
+5. **Product recommendations**  
+   → [`05_recommendations/`](./05_recommendations/)  
+   Decision framework, recommendations, experiment design, success metrics, and risks.
+
+Each phase is documented to preserve **clarity, traceability, and intent**.
 
 ---
 
-_Work in progress._
+## 8. Status
+
+This is a living portfolio project.
+Future extensions may include:
+- Execution simulations
+- Additional case studies (retention, pricing, monetization)
+- Lightweight modeling notebooks using synthetic data
+
+Feedback and discussion are welcome.
