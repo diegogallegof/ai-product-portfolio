@@ -72,7 +72,7 @@ def generate_conversion_label(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-
+'''
 if __name__ == "__main__":
     df = generate_synthetic_users(n_users=5000)
     df = generate_conversion_label(df)
@@ -82,3 +82,14 @@ if __name__ == "__main__":
 
     df.to_csv("synthetic_user_conversion_data.csv", index=False)
     print("\nSaved synthetic_user_conversion_data.csv")
+'''
+if __name__ == "__main__":
+    df = generate_synthetic_users(n_users=5000)
+    df = generate_conversion_label(df)
+
+    print(df.head())
+    print("\nConversion rate:", df["converted"].mean())
+
+    output_path = "data/synthetic_user_conversion_data.csv"
+    df.to_csv(output_path, index=False)
+    print(f"\nSaved {output_path}")
