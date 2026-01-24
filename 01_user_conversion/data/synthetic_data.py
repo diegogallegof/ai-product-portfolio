@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
 RANDOM_SEED = 42
 np.random.seed(RANDOM_SEED)
@@ -15,9 +16,7 @@ def generate_synthetic_users(n_users: int = 5000) -> pd.DataFrame:
 
     # Engagement signals (early-heavy distribution)
     sessions_7d = np.random.poisson(lam=3, size=n_users)
-    content_hours_7d = np.round(
-        np.random.gamma(shape=2, scale=1.5, size=n_users), 2
-    )
+    content_hours_7d = np.round(np.random.gamma(shape=2, scale=1.5, size=n_users), 2)
     downloads_7d = np.random.poisson(lam=1, size=n_users)
     paywall_views_7d = np.random.poisson(lam=1.2, size=n_users)
 
@@ -72,7 +71,7 @@ def generate_conversion_label(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-'''
+
 if __name__ == "__main__":
     df = generate_synthetic_users(n_users=5000)
     df = generate_conversion_label(df)
@@ -80,16 +79,9 @@ if __name__ == "__main__":
     print(df.head())
     print("\nConversion rate:", df["converted"].mean())
 
-    df.to_csv("synthetic_user_conversion_data.csv", index=False)
-    print("\nSaved synthetic_user_conversion_data.csv")
-'''
-if __name__ == "__main__":
-    df = generate_synthetic_users(n_users=5000)
-    df = generate_conversion_label(df)
+    # Always save next to this script, inside /data
+    data_dir = Path(__file__).resolve().parent
+    output_path = data_dir / "synthetic_user_conversion_data.csv"
 
-    print(df.head())
-    print("\nConversion rate:", df["converted"].mean())
-
-    output_path = "data/synthetic_user_conversion_data.csv"
     df.to_csv(output_path, index=False)
     print(f"\nSaved {output_path}")
