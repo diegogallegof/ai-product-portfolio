@@ -221,4 +221,4 @@ __marimo__/
 # --- Editor/IDE (optional but useful) ---
 .vscode/
 .idea/
-models/
+**/models/
