@@ -46,6 +46,26 @@ but to understand **which signals are plausible, stable, and meaningful**
 from a product perspective.
 
 ---
+## 📦 Model persistence and artifacts
+
+Some notebooks persist lightweight model artifacts to support reproducibility
+and downstream analysis.
+
+For example, baseline models (such as an interpretable logistic regression
+pipeline) are serialized and stored in a dedicated `models/` directory
+outside the `notebooks/` folder.
+
+This approach allows:
+
+- Freezing a baseline for comparison with future models
+- Inspecting coefficients and decision logic without retraining
+- Reusing models across notebooks in a controlled way
+- Making analytical assumptions explicit and traceable
+
+These persisted models are **analytical artifacts**, not production assets.
+They exist to support reasoning, discussion, and decision-making —
+not deployment.
+---
 
 ## 🧭 How this fits into the case study
 
@@ -73,3 +93,5 @@ They are intentionally scoped to support **product decision-making under uncerta
 ---
 
 > These notebooks prioritize clarity, reproducibility, and decision support over complexity.
+
+
