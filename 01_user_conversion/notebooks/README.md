@@ -3,9 +3,12 @@
 This folder contains **supporting analytical notebooks** used throughout the
 *User Conversion* case study.
 
-The notebooks here are **execution artifacts**, not the primary narrative.
+The notebooks here are **execution and reasoning artifacts**, not the primary narrative.
 They exist to explore data, validate assumptions, and generate evidence
 that informs the insights and recommendations documented in the case.
+
+They are intentionally scoped to **support product decision-making**, not to
+stand alone as reports or tutorials.
 
 ---
 
@@ -16,13 +19,17 @@ The notebooks in this folder are used to:
 - Explore and validate behavioral signals related to conversion
 - Perform sanity checks on data distributions and assumptions
 - Support analytical reasoning with reproducible analysis
-- Provide transparency into how insights were derived
+- Make analytical trade-offs explicit and traceable
+- Bridge product intuition with data-backed evidence
 
 They are intentionally kept **lightweight, interpretable, and modular**.
 
 ---
 
-## 📓 Notebook overview
+## 📓 Notebook progression and intent
+
+The notebooks are designed to be read **in sequence**, reflecting how a
+product team would reason through the problem.
 
 ### `01_eda_synthetic_data.ipynb`
 
@@ -45,7 +52,38 @@ The goal is **not** to optimize models here,
 but to understand **which signals are plausible, stable, and meaningful**
 from a product perspective.
 
+This notebook answers the question:
+> *What signals exist, and which are worth examining further?*
+
 ---
+
+### `02_signal_evaluation_and_prioritization.ipynb`
+
+A **narrative, product-oriented evaluation** of candidate behavioral signals.
+
+This notebook moves beyond exploration and focuses on **judgment**.
+
+It examines signals through a product lens, asking:
+
+- Are these signals stable across time and cohorts?
+- Do they add information beyond other signals?
+- When do they emerge in the user lifecycle?
+- Are they early enough — and actionable enough — to support intervention?
+- What trade-offs do they introduce?
+
+The goal is to reduce a broad signal space into a **small, defensible set**
+that is suitable for modeling, experimentation, and decision-making.
+
+This notebook intentionally prioritizes:
+- interpretability over complexity
+- reasoning over optimization
+- product usefulness over predictive power
+
+It answers the question:
+> *Which signals are worth carrying forward — and why?*
+
+---
+
 ## 📦 Model persistence and artifacts
 
 Some notebooks persist lightweight model artifacts to support reproducibility
@@ -65,6 +103,7 @@ This approach allows:
 These persisted models are **analytical artifacts**, not production assets.
 They exist to support reasoning, discussion, and decision-making —
 not deployment.
+
 ---
 
 ## 🧭 How this fits into the case study
@@ -92,6 +131,4 @@ They are intentionally scoped to support **product decision-making under uncerta
 
 ---
 
-> These notebooks prioritize clarity, reproducibility, and decision support over complexity.
-
-
+> These notebooks prioritize clarity, reasoning, and decision support over technical complexity.
