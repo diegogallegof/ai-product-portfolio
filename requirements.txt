@@ -3,3 +3,5 @@ pandas
 matplotlib
 jupyter
 scikit-learn
+fastapi
+uvicorn[standard]
