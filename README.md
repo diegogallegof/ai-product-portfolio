@@ -1,51 +1,109 @@
-# AI Product Portfolio — User Conversion Case Study
+# AI Product Portfolio  
+**Applied AI Systems for Product Decision-Making**
 
-This repository documents an applied AI Product case study at the intersection of
-**Product Management, Data Science, and AI**, focused on **subscription conversion**
-in streaming-style consumer products.
+This repository documents applied AI case studies at the intersection of  
+**Product Management, Data Science, and Systems Architecture**,  
+focused on subscription-driven consumer products.
 
-The goal of this case study is **not** to showcase advanced models or
-production-ready ML systems, but to demonstrate **how data and machine learning
-can responsibly support product decisions** under real-world constraints.
+Rather than showcasing isolated models, this portfolio demonstrates how
+machine learning becomes a structured **decision-support system**
+within real product environments.
 
-This work reflects how I think as a Product Manager when using data and AI
-to reason about uncertainty, trade-offs, and decision impact.
-
-My background spans engineering, software development, and over a decade building
-and operating subscription and streaming products at scale. This case study reflects
-a **product-first approach to AI**: prioritizing metrics, assumptions, limitations,
-and downstream decisions over raw model performance.
+The emphasis is not on model complexity —
+but on clarity, interpretability, and operational alignment.
 
 ---
 
-## 🎯 Case study objective
+# 🎯 Portfolio Objective
 
-The objective of this case study is to explore:
+The purpose of this portfolio is to answer a core question:
 
-> *How can we estimate and reason about a user’s likelihood to convert to a paid
-subscription using realistic behavioral signals — and how should a product team
-act on that information?*
+> How do we responsibly translate behavioral data into structured product decisions?
 
-Rather than optimizing for accuracy alone, the focus is on building a
-**decision-support system** that helps answer questions such as:
+Each case study moves deliberately through:
 
-- Which user behaviors meaningfully signal conversion intent?
-- Where should a product intervene — and where should it not?
-- What assumptions are embedded in our modeling choices?
-- What risks do these decisions introduce?
+- Problem framing
+- Signal design
+- Interpretable modeling
+- Explicit policy logic
+- Decision architecture
+- Operational exposure (API layer)
+
+The goal is to show how AI becomes an instrument of product reasoning —
+not a black-box optimization engine.
 
 ---
 
-## 📂 Repository structure
+# 📌 Featured Case Study
 
-The case study follows a structured, end-to-end flow:
+## 01 — User Conversion Decision System
+
+A structured exploration of subscription conversion in a streaming-style product.
+
+This case study evolved from:
+
+Analytical exploration  
+→ Interpretable modeling  
+→ Persisted model artifact  
+→ FastAPI scoring service  
+→ Explicit decision layer (policy thresholds)  
+
+It demonstrates how model outputs are intentionally separated
+from business policy logic.
+
+### Core Principle
+
+> Models produce probabilities. Products operate on decisions.
+
+---
+
+# 🧠 What This Portfolio Demonstrates
+
+Across projects, this repository highlights the ability to:
+
+- Frame ambiguous growth problems before modeling
+- Design behavioral signals grounded in product context
+- Prefer interpretability over marginal accuracy gains
+- Separate statistical inference from decision policy
+- Build modular AI systems aligned with experimentation strategy
+- Move from analysis to operational architecture
+
+This reflects how an AI Product leader reasons about uncertainty,
+trade-offs, and downstream impact.
+
+---
+
+# 🏗️ Architectural Thinking
+
+Each case study emphasizes layered design:
+
+Signals
+↓
+Model
+↓
+Probability
+↓
+Decision Policy
+↓
+Product Action
+
+
+Where appropriate, systems are exposed through lightweight API layers
+to demonstrate operational viability.
+
+The focus is structured reasoning — not infrastructure scale.
+
+---
+
+# 📂 Repository Structure
 
 ```text
 01_user_conversion/
-├── 02_analytical_framing/     # Business framing, hypotheses, trade-offs
-├── 03_signal_definition/      # Behavioral signals and evaluation criteria
-├── 04_modeling_insights/      # Modeling approach, insights, limitations
-├── 05_recommendations/        # Decision framework and experimentation plan
-├── data/                      # Synthetic data generator and dataset
-├── notebooks/                 # EDA and baseline model training
-├── models/                    # Persisted model artifacts
+├── 02_analytical_framing/      # Business framing and trade-offs
+├── 03_signal_definition/       # Behavioral signal design
+├── 04_modeling_insights/       # Interpretable modeling
+├── 05_recommendations/         # Decision logic and experiment design
+├── app/                        # FastAPI scoring + decision layer
+├── data/                       # Synthetic dataset generator
+├── models/                     # Persisted model artifacts
+├── notebooks/                  # EDA and baseline training
