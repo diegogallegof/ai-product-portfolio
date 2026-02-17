@@ -1,138 +1,183 @@
 # User Conversion Case Study  
-**AI Product & Product-First Data Science**
+**AI Product Decision System | Product-First Data Science**
 
-This repository presents a **product-first data science case study**
+This repository presents a **product-first AI case study**
 focused on understanding and improving **subscription conversion**
 in a consumer streaming product.
 
-The work reflects how an **AI Product Manager / Data-informed PM**
-approaches an ambiguous business problem:
+The project evolved from analytical exploration to a structured
+**decision-support system** that transforms behavioral signals into
+actionable product segments.
+
+This reflects how an **AI Product Manager / Decision-Oriented PM**
+approaches ambiguous growth problems:
 by framing the right questions, identifying meaningful behavioral signals,
-making explicit trade-offs, and translating insights into decisions.
+making explicit trade-offs, and translating model outputs into decisions.
 
 ---
 
-## 1. Problem statement
+# 1. Problem statement
 
 A subscription-based streaming product is experiencing healthy top-of-funnel growth,
-but overall paid conversion remains flat.
+but paid conversion remains flat.
 
-Despite multiple experiments across pricing, messaging, and onboarding,
+Despite experimentation across pricing, onboarding, and messaging,
 it is unclear:
 
-- **Which user behaviors actually predict conversion**
-- **When conversion intent meaningfully emerges**
-- **Where product intervention has the highest leverage**
+- Which user behaviors truly signal conversion intent
+- When meaningful intent emerges in the lifecycle
+- Where product intervention creates the highest leverage
 
-The product team needs data-informed guidance to decide:
-- Where to invest experimentation effort
-- Which user segments to prioritize
-- Which signals truly correlate with conversion (vs noise)
+The product team needs structured, data-informed guidance to decide:
 
----
-
-## 2. Product context
-
-- **Product type:** Consumer streaming subscription
-- **Business model:** Freemium → Paid subscription
-- **Primary KPI:** Subscription conversion rate
-- **Secondary KPIs:** Activation, retention, LTV proxy signals
-
-### Constraints
-- Limited experimentation capacity
-- High risk of overfitting on historical cohorts
-- Strong seasonality and behavioral variance
-
-These constraints shape both the analytical approach
-and the type of recommendations that are feasible in practice.
+- Where to focus experimentation effort
+- Which segments to prioritize
+- How to operationalize model outputs safely
 
 ---
 
-## 3. Key questions
+# 2. From analysis to decision system
 
-This case study aims to answer:
+This project is intentionally structured in two layers:
 
-1. Which user behaviors are most predictive of conversion?
-2. At what point in the user lifecycle do these signals emerge?
-3. How early can we reasonably predict conversion intent?
-4. What trade-offs exist between model accuracy and product usability?
-5. How should these insights influence product decisions?
+### Analytical Layer
+- Signal definition
+- Behavioral validation
+- Interpretable modeling (logistic regression baseline)
 
----
+### Decision Layer
+- Probability → Policy thresholds
+- Explicit segmentation bands
+- Clear separation between model logic and business logic
 
-## 4. Analytical approach (high level)
-
-The analysis follows a **product-first data science approach**:
-
-- Behavioral funnel analysis grounded in real user flows
-- Signal exploration driven by product intuition, not data availability alone
-- Simple, interpretable models used as decision-support tools
-- Validation through cohort analysis and temporal splits
-
-The goal is **not** to build the most accurate model,
-but the **most actionable and explainable** one.
+The goal is not to maximize predictive accuracy,
+but to build a **usable, interpretable, and product-aligned decision framework.**
 
 ---
 
-## 5. What this case study demonstrates
+# 3. Architecture Overview
+
+The project now includes:
+
+- Synthetic but realistic behavioral dataset
+- Interpretable baseline model (scikit-learn pipeline)
+- Persisted model artifact (`.joblib`)
+- FastAPI scoring service
+- Explicit Decision Engine translating probability into action segments
+
+High-level flow:
+
+User Signals
+↓
+Model (predict_proba)
+↓
+Conversion Probability
+↓
+Decision Policy (threshold bands)
+↓
+Action Segment
+
+
+This explicit separation avoids entangling statistical outputs
+with product rules.
+
+---
+
+# 4. Key product questions addressed
+
+1. Which user behaviors most predict conversion?
+2. How early can we detect intent?
+3. What is the trade-off between interpretability and accuracy?
+4. How should probabilities be converted into operational segments?
+5. How can decision logic remain transparent and adjustable?
+
+---
+
+# 5. Technical implementation
+
+## Data
+- Synthetic but structured dataset
+- Behavioral signals aligned with streaming context
+- Logistic probability generation with noise and tier effects
+
+## Model
+- Logistic Regression baseline
+- Interpretable coefficients
+- Pipeline encapsulating preprocessing + estimator
+- Persisted model artifact
+
+## API Layer
+- FastAPI application
+- Pydantic schema validation
+- `/health` and `/score` endpoints
+- Automatic OpenAPI documentation
+
+## Decision Layer
+- Explicit threshold-based segmentation
+- Model logic separated from business policy
+- Designed for controlled experimentation
+
+---
+
+# 6. What this case study demonstrates
 
 This project showcases how an AI Product or Data-informed PM:
 
 - Frames problems before modeling
-- Distinguishes signal from noise
-- Balances interpretability and accuracy
-- Makes uncertainty and limitations explicit
-- Translates insights into concrete product decisions
+- Designs signals intentionally
+- Uses interpretable models as decision-support tools
+- Separates statistical inference from business policy
+- Makes assumptions and trade-offs explicit
+- Moves from analysis to operational system
 
 ---
 
-## 6. What this is — and what it is not
+# 7. What this is — and what it is not
 
-**This is:**
-- A product-driven data science case study
-- A realistic decision-making framework under uncertainty
-- A demonstration of applied AI thinking in a product context
+## This is:
+- A product-driven AI decision system
+- A realistic applied ML architecture
+- A demonstration of operational AI thinking
 
-**This is not:**
-- ❌ A Kaggle-style modeling exercise
-- ❌ A production ML system
-- ❌ A tutorial on algorithms
+## This is not:
+- ❌ A Kaggle competition model
+- ❌ A deep learning showcase
+- ❌ A production-scale MLOps pipeline
 
----
-
-## 7. Case structure
-
-This case study is organized into clear analytical and decision-making phases:
-
-1. **Problem definition & product context**  
-   This document (`README.md`)
-
-2. **Analytical framing**  
-   → [`02_analytical_framing/`](./02_analytical_framing/)  
-   Hypotheses, assumptions, constraints, and decision questions.
-
-3. **Signal definition & evaluation**  
-   → [`03_signal_definition/`](./03_signal_definition/)  
-   Identification, validation, and prioritization of behavioral signals.
-
-4. **Modeling & insights**  
-   → [`04_modeling_insights/`](./04_modeling_insights/)  
-   Interpretable modeling and extraction of product-relevant insights.
-
-5. **Product recommendations**  
-   → [`05_recommendations/`](./05_recommendations/)  
-   Decision framework, recommendations, experiment design, success metrics, and risks.
-
-Each phase is documented to preserve **clarity, traceability, and intent**.
+The focus is clarity, reasoning, and product alignment.
 
 ---
 
-## 8. Status
+# 8. Case structure
 
-This is a living portfolio project.
-Future extensions may include:
-- Execution simulations
-- Additional case studies (retention, pricing, monetization)
-- Lightweight modeling notebooks using synthetic data
+1. Problem definition & context  
+2. Analytical framing  
+3. Signal definition  
+4. Modeling & insights  
+5. Product recommendations  
+6. API & decision layer implementation  
+
+Each phase preserves traceability between:
+
+**Problem → Signal → Model → Decision → Recommendation**
+
+---
+
+# 9. Current status
+
+This project now includes:
+
+- End-to-end scoring API
+- Decision segmentation layer
+- Modular architecture ready for extension
+
+Planned extensions:
+
+- Policy versioning
+- Decision experimentation simulation
+- Lightweight deployment
+- Additional case studies (retention, monetization, lifecycle)
+
+---
 
 Feedback and discussion are welcome.
